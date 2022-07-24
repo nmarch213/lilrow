@@ -13,3 +13,29 @@ datasource db {
 model Example {
     id String @id @default(cuid())
 }
+
+model Parent {
+    id   String @id @default(cuid())
+    name String
+
+    diaperChanges DiaperChangesByParent[]
+}
+
+model DiaperChanges {
+    id          Int     @id @default(autoincrement())
+    poop        Boolean
+    wet         Boolean
+    diaperCount Int     @default(1)
+
+    parents DiaperChangesByParent[]
+}
+
+model DiaperChangesByParent {
+    id        Int      @id @default(autoincrement())
+    changedAt DateTime @default(now())
+
+    Parent          Parent?        @relation(fields: [parentId], references: [id])
+    parentId        String?
+    DiaperChanges   DiaperChanges? @relation(fields: [diaperChangesId], references: [id])
+    diaperChangesId Int?
+}
