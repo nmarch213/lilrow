@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { UrlObject } from 'url';
 
 type TechnologyCardProps = {
   name: string;
